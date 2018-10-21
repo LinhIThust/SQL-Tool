@@ -160,8 +160,7 @@ public class LoginSQLServer extends javax.swing.JFrame {
         checkLogin();
     }//GEN-LAST:event_jButton1MouseClicked
     public void checkLogin(){
-        c.setUserName(jTextFieldUserN.getText());
-        c.setpWorld(jTextFieldPw.getText());
+      
         
         JOptionPane.showMessageDialog(rootPane,"LOGIN !");
     }

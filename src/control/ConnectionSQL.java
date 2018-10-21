@@ -15,34 +15,10 @@ import java.sql.DriverManager;
 public class ConnectionSQL {
 
     private static String dbName = "";
-    private static String userName = "xv";
-    private static String pWorld = "";
+    private static String userName = "sa";
+    private static String pWorld = "2301";
     private static String sqlURL = "jdbc:sqlserver://localhost:1433;"
             + "databaseName=" + dbName + "; integratedSecurity=true";
-
-    public String getDbName() {
-        return dbName;
-    }
-
-    public void setDbName(String dbName) {
-        this.dbName = dbName;
-    }
-
-    public  String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public  String getpWorld() {
-        return pWorld;
-    }
-
-    public void setpWorld(String pWorld) {
-        this.pWorld = pWorld;
-    }
 
     /**
      *
@@ -56,9 +32,6 @@ public class ConnectionSQL {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(sqlURL, userName, pWorld);
-//            System.out.println("xx FAIL!");
-//            System.out.println(userName);
-//            System.out.println(pWorld);
             return conn;
         } catch (Exception ex) {
             System.out.println("LOGIN FAIL!");

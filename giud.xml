@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>E:\Java\SQL-Tool\dist\ScanDataBase.jar</jar>
+  <outfile>E:\Java\SQL-Tool\dist\SQLTool.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\LinhDzai\Pictures\Icons8-Windows-8-Files-Sql.ico</icon>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>NO</txtFileVersion>
+    <fileDescription>công cụ tương tác với SQLSever</fileDescription>
+    <copyright>linhcoper@gmail.com</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>v1</txtProductVersion>
+    <productName>linhdzai1</productName>
+    <companyName>linhdzai0</companyName>
+    <internalName>linhdzai2</internalName>
+    <originalFilename>Tool.exe</originalFilename>
+    <trademarks>nO</trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>

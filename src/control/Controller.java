@@ -71,21 +71,7 @@ public class Controller {
         }
         return list;
     }
-    public void getInfoDB1(String namedb) {
-        String sql;
-        sql = "USE " + namedb + "\n"
-                + "SELECT TABLE_NAME,COLUMN_NAME,DATA_TYPE,"
-                + "CHARACTER_MAXIMUM_LENGTH\n"
-                + "FROM INFORMATION_SCHEMA.COLUMNS";
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            //jTable1.setModel(DbUtils.resultSetToNestedList(rs));
-            
-        } catch (SQLException e) {
-        }
-    }
-
+  
 //    public void Connect2DataBase(String nameDatabase) {
 //        c.setDbName(nameDatabase);
 //    }

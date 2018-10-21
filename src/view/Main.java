@@ -6,15 +6,16 @@
 package view;
 
 import control.Controller;
+import control.Controllerv2;
 import java.awt.print.PrinterException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.DataBase;
 import model.InfoBasicDB;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -30,9 +31,8 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public Main() { 
+    public Main() {
         initComponents();
-        
         model = (DefaultTableModel) jTable1.getModel();
 
     }
@@ -50,15 +50,22 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jTextFieldNameTable = new javax.swing.JTextField();
+        jButtonScan = new javax.swing.JButton();
+        jTextFieldNameDB = new javax.swing.JTextField();
         jButtonExport = new javax.swing.JButton();
-        jTextFieldNameColum = new javax.swing.JTextField();
+        jTextFieldNameTable = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonPrint = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonCreate = new javax.swing.JButton();
+        jButtonDrop = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
+        jTextFieldQuery = new javax.swing.JTextField();
+        jButtonDone = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SQLSERVER TOOL");
@@ -94,16 +101,16 @@ public class Main extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zoom-icon.png"))); // NOI18N
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zoom-icon.png"))); // NOI18N
+        jButtonScan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jButtonScanMouseClicked(evt);
             }
         });
 
-        jTextFieldNameTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextFieldNameDB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNameTableMouseClicked(evt);
+                jTextFieldNameDBMouseClicked(evt);
             }
         });
 
@@ -114,9 +121,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldNameColum.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextFieldNameTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNameColumMouseClicked(evt);
+                jTextFieldNameTableMouseClicked(evt);
             }
         });
 
@@ -124,19 +131,80 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("NameTable");
 
-        jLabel3.setText("linhcopper@gmail.com");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Printer-Ink-icon.png"))); // NOI18N
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Printer-Ink-icon.png"))); // NOI18N
+        jButtonPrint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                jButtonPrintMouseClicked(evt);
             }
         });
 
         jLabel4.setBackground(new java.awt.Color(255, 51, 51));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 204));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("SQLSERVER TOOLS");
+
+        jLabel3.setText("linhcopper@gmail.com");
+
+        jButtonCreate.setText("CREATE TABLE");
+
+        jButtonDrop.setText("DROP TABLE");
+
+        jButtonUpdate.setText("UPDATE TABLE");
+
+        jButtonEdit.setText("EDIT TABLE");
+
+        jTextFieldQuery.setColumns(3);
+
+        jButtonDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Check-icon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldQuery)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                                .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonDrop, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(jButtonDone, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDrop, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonDone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,30 +214,23 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonScan, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(jButtonPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNameDB, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameColum, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextFieldNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
                         .addComponent(jButtonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,21 +241,18 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNameDB, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonScan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNameColum, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButtonExport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(417, 417, 417)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,39 +269,45 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jButtonScanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonScanMouseClicked
         setTableDB();
         listdb = con.getListNameDB();
         disPlayTableDB(listdb);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jButtonScanMouseClicked
 
     private void jButtonExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExportMouseClicked
-        String s1 = jTextFieldNameTable.getText();
-        String s2 = jTextFieldNameColum.getText();
-        String nameDB = (s1.equals("")) ? s2 : s1;
-        listIf = con.getInfoDB(nameDB);
-        setTableTable();
-        disPlayTableTb(listIf);
-    }//GEN-LAST:event_jButtonExportMouseClicked
+        String s1 = jTextFieldNameDB.getText();
+        String s2 = jTextFieldNameTable.getText();
+        if (!s1.equals("") && (s2.equals(""))) {
+            listIf = con.getInfoDB(s1);
+            setTableTable();
+            disPlayTableTb(listIf);
+        }
+        if ((!s1.equals("")) && (!s2.equals(""))) {
+            Controllerv2 con2 = new Controllerv2(s1, s2);
+            con2.getInfoDB1(s1, s2);
+            link2Form(s1, s2);
+        }
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    }//GEN-LAST:event_jButtonExportMouseClicked
+    // in bang
+    private void jButtonPrintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPrintMouseClicked
         try {
             jTable1.print(JTable.PrintMode.NORMAL);
-                    } catch (PrinterException ex) {
+        } catch (PrinterException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_jButtonPrintMouseClicked
+
+    private void jTextFieldNameDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNameDBMouseClicked
+        jTextFieldNameTable.setText("");
+        jTextFieldNameDB.setText("");
+    }//GEN-LAST:event_jTextFieldNameDBMouseClicked
 
     private void jTextFieldNameTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNameTableMouseClicked
-        jTextFieldNameColum.setText("");
-        jTextFieldNameTable.setText("");
-    }//GEN-LAST:event_jTextFieldNameTableMouseClicked
 
-    private void jTextFieldNameColumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNameColumMouseClicked
-        jTextFieldNameColum.setText("");
-        jTextFieldNameTable.setText("");
-    }//GEN-LAST:event_jTextFieldNameColumMouseClicked
+    }//GEN-LAST:event_jTextFieldNameTableMouseClicked
 
     public void setTableDB() {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -268,7 +332,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     public void disPlayTableTb(ArrayList<InfoBasicDB> list) {
-       
         model.setRowCount(0);
         for (InfoBasicDB inf : list) {
             model.addRow(inf.toArray());
@@ -281,6 +344,14 @@ public class Main extends javax.swing.JFrame {
         for (DataBase inf : list) {
             model.addRow(inf.toArray());
         }
+    }
+
+    public void link2Form(String x, String y) {
+        Controllerv2 m = new Controllerv2(x, y);
+        m.setVisible(true);
+        m.pack();
+        m.setLocationRelativeTo(null);
+        m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -319,18 +390,25 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonCreate;
+    private javax.swing.JButton jButtonDone;
+    private javax.swing.JButton jButtonDrop;
+    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonExport;
+    private javax.swing.JButton jButtonPrint;
+    private javax.swing.JButton jButtonScan;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldNameColum;
+    private javax.swing.JTextField jTextFieldNameDB;
     private javax.swing.JTextField jTextFieldNameTable;
+    private javax.swing.JTextField jTextFieldQuery;
     // End of variables declaration//GEN-END:variables
 }
