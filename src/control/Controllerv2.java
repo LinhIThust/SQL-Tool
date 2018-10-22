@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -13,19 +14,35 @@ public class Controllerv2 extends javax.swing.JFrame {
 
     private Connection conn = ConnectionSQL.getConnection();
     DefaultTableModel model;
-
+    /*
+    Hàm getInfoDB1 dùng rất nhiều với các ý tưởng khác nhau tùy vào điều
+    kiện if
+    -với đầu đủ đầu vào 2 tham số t thực hiện bitnh thường
+   - với đầi vào là 1 có 1 rỗng thực hiện theo câu truy vấn...
+    
+    */
+    
     public void getInfoDB1(String namedb, String nameTb) {
         String sql;
-        sql = "USE " + namedb + "\n"
-                + "select * from " + nameTb;
+        if (!nameTb.equals("")) {
+            sql = "USE " + namedb + "\n"
+                    + "select * from " + nameTb;
+        } else {
+            sql = namedb;
+        }
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            jTableTable.setModel(DbUtils.resultSetToTableModel(rs));
-            jTableTable.setVisible(true);
+            if (!rs.equals(null)) {
+                jTableTable.setModel(DbUtils.resultSetToTableModel(rs));
+                jTableTable.setVisible(true);
+            }
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane, "ERROR!");
+            JOptionPane.showMessageDialog(rootPane, "Câu truy vấn không đúng!");
+            this.setState(JFrame.ICONIFIED);
         }
+
     }
 
     public Controllerv2(String x, String y) {

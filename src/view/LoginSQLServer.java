@@ -7,7 +7,9 @@ package view;
 
 import control.ConnectionSQL;
 import java.sql.Connection;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import view.Main;
 
 /**
  *
@@ -21,6 +23,7 @@ public class LoginSQLServer extends javax.swing.JFrame {
      */
     public LoginSQLServer() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,32 +42,52 @@ public class LoginSQLServer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldPw = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButtonExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
-        setBackground(new java.awt.Color(204, 255, 204));
+        setBackground(new java.awt.Color(255, 0, 51));
+        setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(31, 48, 93));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Administrator-icon.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 103, 59, 57));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/preferences-desktop-user-password-icon.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 168, 59, 57));
 
+        jTextFieldUserN.setBackground(new java.awt.Color(31, 48, 93));
+        jTextFieldUserN.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jTextFieldUserN.setForeground(new java.awt.Color(102, 255, 204));
         jTextFieldUserN.setText("User name");
+        jTextFieldUserN.setBorder(null);
         jTextFieldUserN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldUserNMouseClicked(evt);
             }
         });
+        jPanel1.add(jTextFieldUserN, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 190, -1));
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 204));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 255, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("WELCOME TO SQL TOOLS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 283, 63));
 
+        jTextFieldPw.setBackground(new java.awt.Color(31, 48, 93));
+        jTextFieldPw.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jTextFieldPw.setForeground(new java.awt.Color(102, 255, 204));
         jTextFieldPw.setText("Password");
+        jTextFieldPw.setBorder(null);
         jTextFieldPw.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldPwMouseClicked(evt);
@@ -75,7 +98,10 @@ public class LoginSQLServer extends javax.swing.JFrame {
                 jTextFieldPwActionPerformed(evt);
             }
         });
+        jPanel1.add(jTextFieldPw, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 173, -1));
 
+        jButton1.setBackground(new java.awt.Color(31, 48, 93));
+        jButton1.setForeground(new java.awt.Color(102, 255, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Check-icon.png"))); // NOI18N
         jButton1.setText("LOGIN");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,63 +109,22 @@ public class LoginSQLServer extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 243, 96, 34));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 152, 190, 10));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldUserN, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldPw, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldUserN, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)
-                        .addComponent(jTextFieldPw, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButtonExit.setBackground(new java.awt.Color(153, 255, 255));
+        jButtonExit.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Close-icon.png"))); // NOI18N
+        jButtonExit.setBorder(null);
+        jButtonExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonExitMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 40, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,10 +144,21 @@ public class LoginSQLServer extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         checkLogin();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButtonExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jButtonExitMouseClicked
     public void checkLogin(){
-      
-        
-        JOptionPane.showMessageDialog(rootPane,"LOGIN !");
+        if((!jTextFieldPw.getText().equals("2301")) || (!jTextFieldUserN.getText().equals("sa")))
+            JOptionPane.showMessageDialog(rootPane,"USER OR PASSWORD NOT CORRECT!");
+        else
+            callMain();
+    }
+    public void callMain() {
+        Main m = new Main();
+        m.setVisible(true);
+        m.pack();
+        this.dispose();
     }
     /**
      * @param args the command line arguments
@@ -201,10 +197,13 @@ public class LoginSQLServer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextFieldPw;
     private javax.swing.JTextField jTextFieldUserN;
     // End of variables declaration//GEN-END:variables

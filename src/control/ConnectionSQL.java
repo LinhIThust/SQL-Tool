@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  */
 public class ConnectionSQL {
 
-    private static String dbName = "";
+    private static String dbName = "QLKH";
     private static String userName = "sa";
     private static String pWorld = "2301";
     private static String sqlURL = "jdbc:sqlserver://localhost:1433;"
@@ -32,6 +32,7 @@ public class ConnectionSQL {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(sqlURL, userName, pWorld);
+            System.out.println("control.ConnectionSQL.getConnection()");
             return conn;
         } catch (Exception ex) {
             System.out.println("LOGIN FAIL!");
@@ -40,5 +41,6 @@ public class ConnectionSQL {
         return null;
 
     }
+  }
 
-}
+
