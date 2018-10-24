@@ -26,6 +26,7 @@ import model.InfoBasicDB;
  */
 public class Main extends javax.swing.JFrame {
 
+    int x, y;
     Controller con = new Controller();
     ArrayList<DataBase> listdb;
     ArrayList<InfoBasicDB> listIf;
@@ -36,7 +37,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.MAGENTA));
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.MAGENTA));
         model = (DefaultTableModel) jTable1.getModel();
 
     }
@@ -67,12 +68,11 @@ public class Main extends javax.swing.JFrame {
         jButtonDrop = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
-        jTextFieldQuery = new javax.swing.JTextField();
         jButtonDone = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButtonExport = new javax.swing.JButton();
         jButtonScan = new javax.swing.JButton();
@@ -102,11 +102,21 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel6MouseDragged(evt);
+            }
+        });
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel6MousePressed(evt);
+            }
+        });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cloud-Minus-icon.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Cloud-Minus-icon.png")); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -123,7 +133,7 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, 40, 30));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/User-icon.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\User-icon.png")); // NOI18N
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 30, 40));
 
         jLabel3.setText("linhcopper@gmail.com");
@@ -134,14 +144,14 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 204));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files-Sql-icon.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Files-Sql-icon.png")); // NOI18N
         jLabel4.setText("SQLSERVER TOOLS");
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 220, 40));
         jPanel6.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 170, 10));
 
         jButtonExit.setBackground(new java.awt.Color(255, 255, 255));
         jButtonExit.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Close-icon.png"))); // NOI18N
+        jButtonExit.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Close-icon.png")); // NOI18N
         jButtonExit.setBorder(null);
         jButtonExit.setBorderPainted(false);
         jButtonExit.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -159,7 +169,6 @@ public class Main extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(31, 48, 63));
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jTable1.setForeground(new java.awt.Color(51, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -184,51 +193,47 @@ public class Main extends javax.swing.JFrame {
 
         jButtonCreate.setBackground(new java.awt.Color(31, 48, 93));
         jButtonCreate.setForeground(new java.awt.Color(51, 255, 204));
-        jButtonCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Programming-Add-Property-icon.png"))); // NOI18N
+        jButtonCreate.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Programming-Add-Property-icon.png")); // NOI18N
         jButtonCreate.setText("CREATE");
+        jButtonCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCreateMouseClicked(evt);
+            }
+        });
         jPanel3.add(jButtonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 130, 40));
 
         jButtonDrop.setBackground(new java.awt.Color(31, 48, 93));
         jButtonDrop.setForeground(new java.awt.Color(51, 255, 204));
-        jButtonDrop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/database-delete-icon.png"))); // NOI18N
+        jButtonDrop.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\database-delete-icon.png")); // NOI18N
         jButtonDrop.setText("DROP ");
         jButtonDrop.setPreferredSize(new java.awt.Dimension(115, 41));
+        jButtonDrop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDropMouseClicked(evt);
+            }
+        });
         jPanel3.add(jButtonDrop, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 130, 40));
 
         jButtonUpdate.setBackground(new java.awt.Color(31, 48, 93));
         jButtonUpdate.setForeground(new java.awt.Color(51, 255, 204));
-        jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Actions-edit-redo-icon.png"))); // NOI18N
+        jButtonUpdate.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Actions-edit-redo-icon.png")); // NOI18N
         jButtonUpdate.setText("UPDATE");
         jPanel3.add(jButtonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 130, 40));
 
         jButtonEdit.setBackground(new java.awt.Color(31, 48, 93));
         jButtonEdit.setForeground(new java.awt.Color(51, 255, 204));
-        jButtonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fix-it-icon.png"))); // NOI18N
+        jButtonEdit.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\fix-it-icon.png")); // NOI18N
         jButtonEdit.setText("EDIT");
         jButtonEdit.setPreferredSize(new java.awt.Dimension(115, 41));
+        jButtonEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEditMouseClicked(evt);
+            }
+        });
         jPanel3.add(jButtonEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, -1));
 
-        jTextFieldQuery.setBackground(new java.awt.Color(31, 48, 93));
-        jTextFieldQuery.setColumns(3);
-        jTextFieldQuery.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextFieldQuery.setForeground(new java.awt.Color(51, 255, 204));
-        jTextFieldQuery.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextFieldQuery.setText("USE nameDB SELECT.....");
-        jTextFieldQuery.setBorder(null);
-        jTextFieldQuery.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldQueryMouseClicked(evt);
-            }
-        });
-        jTextFieldQuery.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldQueryActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jTextFieldQuery, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 220, 260, 30));
-
         jButtonDone.setBackground(new java.awt.Color(31, 48, 93));
-        jButtonDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Check-icon.png"))); // NOI18N
+        jButtonDone.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Check-icon.png")); // NOI18N
         jButtonDone.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonDoneMouseClicked(evt);
@@ -239,23 +244,32 @@ public class Main extends javax.swing.JFrame {
                 jButtonDoneActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 259, 65, 40));
+        jPanel3.add(jButtonDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 100, 40));
 
-        jSeparator1.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 250, 260, -1));
+        jTextArea1.setBackground(new Color(0,0,0,0));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(51, 51, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setBorder(null);
+        jTextArea1.setOpaque(false);
+        jScrollPane2.setViewportView(jTextArea1);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Document-Write-icon (1).png"))); // NOI18N
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 40, 50));
-
-        jPanel5.setBackground(new java.awt.Color(214, 217, 224));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 120));
 
         jLabel7.setFont(new java.awt.Font("Imprint MT Shadow", 1, 17)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sql-runner-icon.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Sql-runner-icon.png")); // NOI18N
         jLabel7.setText("TOOLS");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 140, 50));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 140, 50));
+
+        jLabel8.setBackground(new Color(0,0,0,0));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 255, 51));
+        jLabel8.setText("String Query");
+        jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 0, 255)));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 90, 20));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, -1, 410));
 
@@ -264,7 +278,7 @@ public class Main extends javax.swing.JFrame {
 
         jButtonExport.setBackground(new java.awt.Color(31, 48, 93));
         jButtonExport.setForeground(new java.awt.Color(31, 48, 93));
-        jButtonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/export-icon.png"))); // NOI18N
+        jButtonExport.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\export-icon.png")); // NOI18N
         jButtonExport.setBorder(null);
         jButtonExport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -275,7 +289,7 @@ public class Main extends javax.swing.JFrame {
 
         jButtonScan.setBackground(new java.awt.Color(31, 48, 93));
         jButtonScan.setForeground(new java.awt.Color(31, 48, 93));
-        jButtonScan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zoom-icon.png"))); // NOI18N
+        jButtonScan.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Zoom-icon.png")); // NOI18N
         jButtonScan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonScanMouseClicked(evt);
@@ -285,7 +299,7 @@ public class Main extends javax.swing.JFrame {
 
         jButtonPrint.setBackground(new java.awt.Color(31, 48, 93));
         jButtonPrint.setForeground(new java.awt.Color(31, 48, 93));
-        jButtonPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Printer-Ink-icon.png"))); // NOI18N
+        jButtonPrint.setIcon(new javax.swing.ImageIcon("E:\\Java\\SQL-Tool\\lib\\icon\\Printer-Ink-icon.png")); // NOI18N
         jButtonPrint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonPrintMouseClicked(evt);
@@ -309,11 +323,6 @@ public class Main extends javax.swing.JFrame {
         jTextFieldNameDB.setAlignmentX(0.0F);
         jTextFieldNameDB.setAlignmentY(0.0F);
         jTextFieldNameDB.setBorder(null);
-        jTextFieldNameDB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNameDBMouseClicked(evt);
-            }
-        });
         jPanel4.add(jTextFieldNameDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 30));
 
         jTextFieldNameTB.setBackground(new java.awt.Color(31, 48, 93));
@@ -323,11 +332,6 @@ public class Main extends javax.swing.JFrame {
         jTextFieldNameTB.setAlignmentX(0.0F);
         jTextFieldNameTB.setAlignmentY(0.0F);
         jTextFieldNameTB.setBorder(null);
-        jTextFieldNameTB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNameTBMouseClicked(evt);
-            }
-        });
         jPanel4.add(jTextFieldNameTB, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 160, 30));
         jPanel4.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 160, 10));
 
@@ -338,6 +342,10 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    //xử lí sự kiện
     private void jButtonScanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonScanMouseClicked
         setTableDB();
         listdb = con.getListNameDB();
@@ -348,7 +356,7 @@ public class Main extends javax.swing.JFrame {
         String s1 = jTextFieldNameDB.getText();
         String s2 = jTextFieldNameTB.getText();
         if (s1.equals("") && (s2.equals(""))) {
-            JOptionPane.showMessageDialog(rootPane,"Chưa điền thông tin!");
+            JOptionPane.showMessageDialog(rootPane, "Chưa điền thông tin!");
         }
         if (!s1.equals("") && (s2.equals(""))) {
             listIf = con.getInfoDB(s1);
@@ -356,9 +364,7 @@ public class Main extends javax.swing.JFrame {
             disPlayTableTb(listIf);
         }
         if ((!s1.equals("")) && (!s2.equals(""))) {
-            Controllerv2 con2 = new Controllerv2(s1, s2);
-            con2.getInfoDB1(s1, s2);
-            link2Form(s1, s2);
+            link2Form("use "+s1+" select * from "+s2,"");
         }
 
     }//GEN-LAST:event_jButtonExportMouseClicked
@@ -372,17 +378,13 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonPrintMouseClicked
 
-    private void jTextFieldNameDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNameDBMouseClicked
-        jTextFieldNameTB.setText("");
-        jTextFieldNameDB.setText("");
-    }//GEN-LAST:event_jTextFieldNameDBMouseClicked
-
     private void jButtonDoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDoneMouseClicked
-        String s = jTextFieldQuery.getText();
-        if (s.equals("")) {
+        
+        String s1 =jTextArea1.getText();
+        if (s1.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Thông tin điều không đúng!");
         } else {
-            link2Form(s, "");
+            link2Form(s1,"");
         }
     }//GEN-LAST:event_jButtonDoneMouseClicked
 
@@ -390,30 +392,58 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
-    private void jTextFieldQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQueryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldQueryActionPerformed
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jTextFieldQueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldQueryMouseClicked
-        jTextFieldQuery.setText("USE ");
-    }//GEN-LAST:event_jTextFieldQueryMouseClicked
-
-    private void jTextFieldNameTBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNameTBMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNameTBMouseClicked
-
     private void jButtonExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExitMouseClicked
-            System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jButtonExitMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel6MousePressed
+
+    private void jPanel6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseDragged
+        int x1 = evt.getXOnScreen();
+        int y1 = evt.getYOnScreen();
+        setLocation(x1 - x, y1 - y);
+    }//GEN-LAST:event_jPanel6MouseDragged
+
+    private void jButtonEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditMouseClicked
+       // System.out.println(jTable1.getValueAt(jTable1.getSelectedRow(),jTable1.getSelectedColumn()));
+    }//GEN-LAST:event_jButtonEditMouseClicked
+
+    private void jButtonDropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDropMouseClicked
+        int r = jTable1.getSelectedRow();
+        int c = jTable1.getSelectedColumn();
+        if (r != -1 && c != -1) {
+            String s = jTable1.getValueAt(r, c).toString();
+            int op = JOptionPane.showConfirmDialog(rootPane, "Ban có muốn xóa DB: " + s,
+                    "CẢNH BÁO!", JOptionPane.YES_NO_OPTION);
+            if (op == JOptionPane.YES_OPTION) {
+                link2Form(s, "DROP");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn tên DataBase để xóa!");
+        }
+
+    }//GEN-LAST:event_jButtonDropMouseClicked
+
+    private void jButtonCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCreateMouseClicked
+        callFormCreateDB();
+    }//GEN-LAST:event_jButtonCreateMouseClicked
+
+    
+    
+    
+    
+    //các hàm thêm vào
     public void setTableDB() {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -457,6 +487,12 @@ public class Main extends javax.swing.JFrame {
         m.pack();
         m.setLocationRelativeTo(null);
         m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void callFormCreateDB(){
+        StringDB cdb = new StringDB();
+        cdb.setVisible(true);
+        cdb.pack();
+        cdb.setLocationRelativeTo(null);
     }
 
     /**
@@ -509,24 +545,23 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     public javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldNameDB;
     private javax.swing.JTextField jTextFieldNameTB;
-    private javax.swing.JTextField jTextFieldQuery;
     // End of variables declaration//GEN-END:variables
 }
