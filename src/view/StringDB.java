@@ -7,6 +7,9 @@ package view;
 
 import control.Controllerv2;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import view.CreateDB;
@@ -24,7 +27,6 @@ public class StringDB extends javax.swing.JFrame {
      */
     public StringDB() {
         initComponents();
-
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
@@ -74,7 +76,11 @@ public class StringDB extends javax.swing.JFrame {
 
     private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
 
-        new Controllerv2("create database "+jTextFieldDB.getText(), "CREATE");
+        try {
+            new Controllerv2("create database "+jTextFieldDB.getText(), "NORETURN");
+        } catch (SQLException ex) {
+            Logger.getLogger(StringDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
         link2Form(jTextFieldDB.getText());
     }//GEN-LAST:event_jButtonOKMouseClicked
 

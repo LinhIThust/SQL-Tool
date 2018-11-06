@@ -18,7 +18,7 @@ import java.awt.Color;
  */
 public class LoginSQLServer extends javax.swing.JFrame {
 
-    ConnectionSQL c = new ConnectionSQL();
+    
     public Connection con = ConnectionSQL.getConnection();
 
     /**
@@ -156,7 +156,6 @@ public class LoginSQLServer extends javax.swing.JFrame {
 
     private void kButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton2MouseClicked
         System.exit(0);
-
         kButton2.setSelected(false);
     }//GEN-LAST:event_kButton2MouseClicked
 

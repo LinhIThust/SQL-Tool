@@ -9,6 +9,7 @@ import control.Controller;
 import control.Controllerv2;
 import java.awt.Color;
 import java.awt.print.PrinterException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.DataBase;
 import model.InfoBasicDB;
+import java.lang.String;
 
 /**
  *
@@ -170,7 +172,7 @@ public class Main extends javax.swing.JFrame {
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(51, 255, 204));
+        jTable1.setForeground(new java.awt.Color(51, 51, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -347,9 +349,7 @@ public class Main extends javax.swing.JFrame {
     
     //xử lí sự kiện
     private void jButtonScanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonScanMouseClicked
-        setTableDB();
-        listdb = con.getListNameDB();
-        disPlayTableDB(listdb);
+        updateTable();
     }//GEN-LAST:event_jButtonScanMouseClicked
 
     private void jButtonExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExportMouseClicked
@@ -364,7 +364,12 @@ public class Main extends javax.swing.JFrame {
             disPlayTableTb(listIf);
         }
         if ((!s1.equals("")) && (!s2.equals(""))) {
-            link2Form("use "+s1+" select * from "+s2,"");
+            try {
+                link2Form("use "+s1+" select * from "+s2,"RETURN");
+            } catch (SQLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
 
     }//GEN-LAST:event_jButtonExportMouseClicked
@@ -384,8 +389,13 @@ public class Main extends javax.swing.JFrame {
         if (s1.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Thông tin điều không đúng!");
         } else {
-            link2Form(s1,"");
+            try {
+                link2Form(s1,typeQuery(s1));
+            } catch (SQLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }//GEN-LAST:event_jButtonDoneMouseClicked
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
@@ -420,18 +430,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditMouseClicked
 
     private void jButtonDropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDropMouseClicked
-        int r = jTable1.getSelectedRow();
-        int c = jTable1.getSelectedColumn();
-        if (r != -1 && c != -1) {
-            String s = jTable1.getValueAt(r, c).toString();
-            int op = JOptionPane.showConfirmDialog(rootPane, "Ban có muốn xóa DB: " + s,
-                    "CẢNH BÁO!", JOptionPane.YES_NO_OPTION);
-            if (op == JOptionPane.YES_OPTION) {
-                link2Form(s, "DROP");
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn tên DataBase để xóa!");
-        }
+      dropDB();
 
     }//GEN-LAST:event_jButtonDropMouseClicked
 
@@ -439,11 +438,15 @@ public class Main extends javax.swing.JFrame {
         callFormCreateDB();
     }//GEN-LAST:event_jButtonCreateMouseClicked
 
-    
-    
-    
+
     
     //các hàm thêm vào
+    public void updateTable(){
+        setTableDB();
+        listdb = con.getListNameDB();
+        disPlayTableDB(listdb);
+    }
+    //----------------------------------------------------------------
     public void setTableDB() {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -454,7 +457,6 @@ public class Main extends javax.swing.JFrame {
         model = (DefaultTableModel) jTable1.getModel();
 
     }
-
     public void setTableTable() {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -465,14 +467,12 @@ public class Main extends javax.swing.JFrame {
         ));
         model = (DefaultTableModel) jTable1.getModel();
     }
-
     public void disPlayTableTb(ArrayList<InfoBasicDB> list) {
         model.setRowCount(0);
         for (InfoBasicDB inf : list) {
             model.addRow(inf.toArray());
         }
     }
-
     public void disPlayTableDB(ArrayList<DataBase> list) {
 
         model.setRowCount(0);
@@ -480,21 +480,59 @@ public class Main extends javax.swing.JFrame {
             model.addRow(inf.toArray());
         }
     }
-
-    public void link2Form(String x, String y) {
-        Controllerv2 m = new Controllerv2(x, y);
+    //---------------------------------------------------------------
+    
+    //thực hiện việc truyền tham số cho việc truy vấn
+    public void link2Form(String sql, String typeSQL) throws SQLException {
+        Controllerv2 m = new Controllerv2(sql, typeSQL);
         m.setVisible(true);
         m.pack();
         m.setLocationRelativeTo(null);
         m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    // lọc câu truy ván xem nó thuộc kiểu nào : edit,update,select...
+    public String typeQuery(String s){
+        s=s.toLowerCase();
+        if(s.contains("select")){
+            return "RETURN";
+        }
+        return "NORETURN";
+    }
+    //gọi form tao db
     public void callFormCreateDB(){
         StringDB cdb = new StringDB();
         cdb.setVisible(true);
         cdb.pack();
         cdb.setLocationRelativeTo(null);
     }
-
+    //lấy giá trị ô đang chọn
+    public String getBoxTable(){
+        String s="";
+        int r = jTable1.getSelectedRow();
+        int c = jTable1.getSelectedColumn();
+        if (r != -1 && c != -1) {
+            s = jTable1.getValueAt(r, c).toString();
+        }
+        return s;
+    }
+    //xóa database muốn xóa
+    public void dropDB(){
+        String s =getBoxTable();
+        if (!s.equals("")) {
+            int op = JOptionPane.showConfirmDialog(rootPane, "Ban có muốn xóa DB: " + s,
+                    "CẢNH BÁO!", JOptionPane.YES_NO_OPTION);
+            if (op == JOptionPane.YES_OPTION) {
+                String sql = "drop database "+s; 
+                try {
+                    link2Form(s,"NORETURN");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn tên DataBase để xóa!");
+        }
+    }
     /**
      * @param args the command line arguments
      */

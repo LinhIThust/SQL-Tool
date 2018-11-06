@@ -7,6 +7,9 @@ package view;
 
 import control.Controllerv2;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +26,7 @@ public class CreateDB extends javax.swing.JFrame {
      */
     public CreateDB(String s) {
         initComponents();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         model = (DefaultTableModel) jTable1.getModel();
         jLabelDB.setText(s);
         
@@ -138,9 +141,13 @@ public class CreateDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
-        System.out.println(setQuery());
-        link2Form(setQuery(), "CREATE");
-        //jTextFieldTB.setText("");
+        //System.out.println(setQuery());
+        try {
+            link2Form(setQuery(), "CREATE");
+            //jTextFieldTB.setText("");
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonOKMouseClicked
 
     private void jButtonADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonADDMouseClicked
@@ -193,7 +200,7 @@ public class CreateDB extends javax.swing.JFrame {
         return sql;
     }
 
-    public void link2Form(String x, String y) {
+    public void link2Form(String x, String y) throws SQLException {
         new Controllerv2(x, y);
     }
 

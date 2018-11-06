@@ -1,94 +1,87 @@
+/*
+
+execute:dùng cho câu sql DDL (tạo, xóa, sửa bảng)
+executeUpdate: dùng cho câu sql INSERT, UPDATE, DELETE
+executeQuery: dùng câu sql SELECT
+
+-Với những trường hợp SQL không cần truyền vào tham số thì 
+sẽ sử dụng đối tượng Statement
+-Với nhưng trường hợp SQL cần truyền vào tham số để filter trong việc 
+select, delete, hay update thì sẽ sử dụng đối tượng PreparedStatement.
+
+
+ */
 package control;
 
-import java.awt.Color;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.BorderFactory;
+import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
-import view.Main;
 
-public class Controllerv2 extends javax.swing.JFrame {
-
-    private Connection conn = ConnectionSQL.getConnection();
+public final class Controllerv2 extends javax.swing.JFrame {
+    
+    private final Connection conn = ConnectionSQL.getConnection();
     DefaultTableModel model;
     int xMouse, yMouse;
-
-    public Controllerv2(String x, String y) {
-        initComponents();
-        querySQL(x,y);
-        
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        model = (DefaultTableModel) jTableTable.getModel();
-        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.MAGENTA));
-        
-    }
-
-  /**
-   *
-   @param s:là tên database
-   @param condition : là hành động nó thực hiện,edit,xóa,..
-   @return  a string query!
-   */
-    public void querySQL(String s, String condition) {
-        switch (condition) {
-            case "DROP":
-                String sql ="DROP DATABASE "+ s;
-                setInfo(sql);
-                System.out.println(sql);
-                dispose();
-                break;
-            case "EDIT":break;
-            case "UPDATE":break;
-            case "CREATE":
-                setInfo(s);
-                break;
-            default:getInfoDB(s);
-        }
-       
-    }
-    /**
-     @param sql : là 1 câu lệnh query
-     @deprecated : thực hiện câu lệnh sql trả về từ  hàm querySQL
-     * @return :null
-     */
-    private void setInfo(String sql){
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-               int rs = ps.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane,"Thành Công!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane,"Câu truy Vấn sai");
-        }
-    }
-      /*
-    Hàm getInfoDB1 dùng rất nhiều với các ý tưởng khác nhau tùy vào điều
-    kiện if
-    -với đầu đủ đầu vào 2 tham số t thực hiện bitnh thường
-   - với đầi vào là 1 có 1 rỗng thực hiện theo câu truy vấn...
     
-     */
-    private void getInfoDB(String sql) {
-        System.out.println(sql);
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            if (!rs.equals(null)) {
-                //System.out.println(rs.getArray(1));
-                jTableTable.setModel(DbUtils.resultSetToTableModel(rs));
-                jTableTable.setVisible(true);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane, "Câu truy vấn không đúng!");
-            this.dispose();
-        }
-
+    public Controllerv2(String sql, String typeSQL) throws SQLException {
+        initComponents();
+        querySQL(sql, typeSQL);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        model = (DefaultTableModel) jTableTable.getModel();
+//        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,Color.MAGENTA));     
     }
 
+    /**
+     *
+     * @param s:là tên database
+     * @param condition : là hành động nó thực hiện có trả về hoặc k trả về
+     * @return a string query!
+     */
+    
+    public void querySQL(String sql, String condition) throws SQLException {
+        switch (condition) {
+            case "NORETURN":
+                CreateEditDel(sql);
+                break;
+            case "RETURN":
+                getInfo(sql);
+                jLabel2.setVisible(false);
+                break;
+            default:;
+        }
+    }
+
+    private void CreateEditDel(String sql) throws SQLException {
+        Statement st = conn.createStatement();
+        st.executeUpdate(sql);
+        jTableTable.setVisible(false);
+        jLabel1.setVisible(false);
+        
+    }
+
+    private void getInfo(String sql) throws SQLException {
+        System.out.println(sql);
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (!rs.equals(null)) {
+            jTableTable.setModel(DbUtils.resultSetToTableModel(rs));
+            jTableTable.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "LỖI");
+        }
+    }
+
+    private void UpdateInsert(String sql) throws SQLException {
+        System.out.println(sql);
+        Statement st = conn.createStatement();
+        int rs = st.executeUpdate(sql);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -97,6 +90,7 @@ public class Controllerv2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTable = new javax.swing.JTable();
 
@@ -133,6 +127,10 @@ public class Controllerv2 extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("THÀNH CÔNG!");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 260, 90));
+
         jTableTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -154,7 +152,7 @@ public class Controllerv2 extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
-
+// để thực hiện việc di chuyển cửa sổ
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         int x1 = evt.getXOnScreen();
         int y1 = evt.getYOnScreen();
@@ -169,6 +167,7 @@ public class Controllerv2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
